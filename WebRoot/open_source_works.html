@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>开源作品</title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<style>
+    .fakeimg {
+        height: 200px;
+         background: #aaa;
+    }
+	</style>
+	<script>
+ 	$(document).ready(function(){
+		$(".form-control").val("请输入内容");
+		$(".form-control").focus(function(){
+  			$(this).val("");
+		});
+		$(".search-list").on("click","li",function(){
+		/*alert("Text: " + $(this).text());*/
+			$("#search-choose").text($(this).text());
+		});
+	});
+  	
+	</script>
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                        
+				</button>
+				<img src="images/icon/logo.png" width=52px height=51px class="img-circle" style="margin-left:12vw;">
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav sethover">
+					<li class="active dropdown"><a href="index.html">首页</a></li>
+					<li class="active dropdown">
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">开源资源</a>
+                    	<ul class="dropdown-menu">
+                    		<li><a href="opensource_software.html">开源软件</a></li>
+                            <li><a href="open_source_license.html">开源许可证</a></li>
+                            <li><a href="open_source_works.html">开源作品</a></li>
+                    	</ul>
+                        
+                    </li>
+					<li class="active dropdown">
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">开源大事</a>
+                    	<ul class="dropdown-menu">
+                        	<li><a href="basis_to_reassure.html">基础解惑</a></li>
+                            <li><a href="Classification_of_the_preview.html">分类预览</a></li>
+                            <li><a href="license_list.html">许可证列表</a></li>
+                            <li><a href="compatibility_analysis.html">兼容分析</a></li>
+                        </ul>
+					</li>
+					<li class="active dropdown">
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">许可证工具</a>
+                    	<ul class="dropdown-menu">
+                        	<li><a href="search_engine.html">搜索引擎</a></li>
+                            <li><a href="the_selector.html">选择器</a></li>
+                        </ul>
+                    </li>
+					<li class="active dropdown">
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们</a>
+                    	<ul class="dropdown-menu">
+                        	<li><a href="#">开源新资讯</a></li>
+                            <li><a href="#">许可证维度</a></li>
+                            <li><a href="#">许可证生成</a></li>
+                        </ul>
+                    </li>
+                    
+					
+        <!--    <li id="search" class="panel-collapse collapse" style="margin-left:400px;"><a>123132</span></a></li>-->
+				</ul>
+				<ul class="nav navbar-nav navbar-right" style="padding-right:12vw;">
+                	<li>
+ 						<div class="collapse navbar-right" id="search">
+							<form class="bs-example bs-example-form" role="form">  
+								<div class="input-group">
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="search-choose">
+                                        	许可证
+										</button>
+                                        <span class="caret"></span>
+										<ul class="dropdown-menu search-list">
+                                        	<li>
+												<a href="#">许可证</a>
+											</li>
+											<li>
+												<a href="#">认证方</a>
+											</li>
+											<li>
+												<a href="#">全部</a>
+											</li>
+										</ul>
+									</div><!-- /btn-group -->
+									<input type="text" class="form-control">
+								</div><!-- /input-group -->
+							</form>
+						</div>
+ 					</li>
+					<li class="active " data-toggle="collapse"  data-target="#search"><a style="width:50px;margin:0px;" href="#"> <span class="glyphicon glyphicon-search"></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+  
+  <div class="container row-style ">
+    <div class="row">
+      <div class="col-md-10 text-center col-md-offset-1 col-style">
+      	<div class="row title title-margin-top">
+        	<p><span>开源许可证选择器使用说明</span></p>
+            <p class="title-text"><span>该工具旨在帮助用户理解他们自己对于自由和开源软件许可协议的偏好。用户必须自己阅读这些许可协议。在将许可协议适用于您的财产之前，阅读并完全理解您选择的许可协议是非常重要的。支撑该工具运行的许可类型分类，会不可避免地有些缩减。因此，不能也切不可将该工具的输出信息视为法律意见。</span></p>
+        </div>
+        <h2>标题</h2>
+        <h5>副标题</h5>
+        <div class="fakeimg">图像</div>
+        <p>一些文本..</p>
+        <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+        <br>
+        <h2>标题</h2>
+        <h5>副标题</h5>
+        <div class="fakeimg">图像</div>
+        <p>一些文本..</p>
+        <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+         <h2>标题</h2>
+        <h5>副标题</h5>
+        <div class="fakeimg">图像</div>
+        <p>一些文本..</p>
+        <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+        <br>
+        <h2>标题</h2>
+        <h5>副标题</h5>
+        <div class="fakeimg">图像</div>
+        <p>一些文本..</p>
+        <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+         <h2>标题</h2>
+        <h5>副标题</h5>
+        <div class="fakeimg">图像</div>
+        <p>一些文本..</p>
+        <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+        <br>
+        <h2>标题</h2>
+        <h5>副标题</h5>
+        <div class="fakeimg">图像</div>
+        <p>一些文本..</p>
+        <p>菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！菜鸟教程，学的不仅是技术，更是梦想！！！</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="otherfoot" style="margin-bottom:0">
+  	<img src="images/icon/logo.png" width=77px height=77px class="img-circle" style="margin-left:20vw; border:0;">
+    <div class="othercopyright">
+            	Copyright &copy; 西南大学<a href="http://www.swu.edu.cn/" target="_blank" title="西南大学">www.swu.edu.cn</a> 
+	</div>
+  </div>
+</body>
+</html>
