@@ -8,6 +8,7 @@
 <%@ page import="com.opensource.Domain.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
+    List<article> articles = (List<article>) request.getAttribute("article"); 
     String paramindex = (String)request.getAttribute("indexpage"); 
     String paramall = (String)request.getAttribute("allpage"); 
     int indexpage = Integer.parseInt(paramindex);
@@ -75,28 +76,25 @@
           <div class="col-md-10 text-center col-md-offset-1 col-style" style="background-color: #fff" id="content">
             <div class="row title">
                 <p class="common-title text-align-center" style="line-height: 50px">
-                    <span>基础解惑</span>
-                    <a class="content-total-time" style="position: absolute;right:36px" id="fqa-add"><span>新增</span></a>
+                    <span>开源知识</span>
+                    <a href="/opensource/admin/manage/redirectAddArticle" class="content-total-time" style="position: absolute;right:36px"><span class="manage-a-big">新增</span></a>
                 </p>
             </div>
             <%int num = (indexpage-1)*10+1;%>
-            <c:forEach items="${fqa}" var="item">
+            <c:forEach items="${article}" var="item">
                 <div class="row">
                     <div class="content-total text-align-right" style="padding-bottom: 8px">
                         <p style="width:600px;word-wrap: break-word; display:inline-block">
-                            <%=num++%>、<span class='question'>${item.question}</span>
+                            <a href='opensource/license/articleMore?id=${item.id}' target='_blank'><%=num++%>、${item.title}</a>
                         </p>
-                        <span class="float-right  content-total-time manage-format">
-                            <a class='fqa-alter'><span>修改</span></a>
-                            <a class='fqa-delete'><span class="padding-left-50">删除</span></a>
+                        <span class="float-right content-total-time manage-format">
+                            <a class='manage-a' href='/opensource/admin/manage/alterArticle?id=${item.id}' target='_blank'>修改</a>
+                            <a class='manage-a' id='delete-article' href='/opensource/admin/manage/deleteArticle?id=${item.id}' style="margin-left: 50px">删除</a>
                         </span>
                     </div>
                     <div>
-                        <p status="0" class="text close_text content-article text-align-right answer">
-                        ${item.answer}</p> 
-                        <div class="text-align-right show_more">
-                            <a href="javascript:void(0);" class="show_more_btn">查看更多</a>
-                        </div>
+                        <p status="0" class="text close_text content-article text-align-right">
+                        ${item.introduction}</p> 
                     </div>
                     <div class="line"></div>
                 </div>
@@ -104,23 +102,23 @@
             <div class="row" style="margin:18px 0 68px 0;">
                 <ul class="pagination">
                     <li>
-                        <a href="/opensource/admin/manage/manageFqa?page=1">首页</a>
+                        <a href="/opensource/admin/manage/manageArticle?page=1">首页</a>
                     </li>
                     <% 
                         int prev = (indexpage-1>0) ? (indexpage-1):1;
                         int next = (indexpage+1>=allpage) ? allpage:(indexpage+1);
-                        out.println("<li><a href=\"/opensource/admin/manage/manageFqa?page="+prev+"\">&laquo;</a></li>"); 
+                        out.println("<li><a href=\"/opensource/admin/manage/manageArticle?page="+prev+"\">&laquo;</a></li>"); 
                         if(allpage<=5)
                         {
                             for(int i=1;i<=allpage;i++)
                             { 
                                 if(i==indexpage)
                                 {
-                                    out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                    out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                 }
                                 else
                                 {
-                                    out.println("<li><a href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                    out.println("<li><a href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                 }
                             } 
                         }
@@ -132,11 +130,11 @@
                                 { 
                                     if(i==indexpage)
                                     {
-                                        out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                        out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                     }
                                     else
                                     {
-                                        out.println("<li><a href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                        out.println("<li><a href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                     }
                                 }
                             }
@@ -146,11 +144,11 @@
                                 { 
                                     if(i==indexpage)
                                     {
-                                        out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                        out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                     }
                                     else
                                     {
-                                        out.println("<li><a href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                        out.println("<li><a href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                     }
                                 }
                             }
@@ -160,44 +158,23 @@
                                 { 
                                     if(i==indexpage)
                                     {
-                                        out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                        out.println("<li><a class=\"page-a\" href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                     }
                                     else
                                     {
-                                        out.println("<li><a href=\"/opensource/admin/manage/manageFqa?page="+i+"\">"+i+"</a></li>");
+                                        out.println("<li><a href=\"/opensource/admin/manage/manageArticle?page="+i+"\">"+i+"</a></li>");
                                     }
                                 }
                             }
                         } 
-                        out.println("<li><a href=\"/opensource/admin/manage/manageFqa?page="+next+"\">&raquo;</a></li>");
-                        out.println("<li><a href=\"/opensource/admin/manage/manageFqa?page="+allpage+"\">尾页</a></li>");
+                        out.println("<li><a href=\"/opensource/admin/manage/manageArticle?page="+next+"\">&raquo;</a></li>");
+                        out.println("<li><a href=\"/opensource/admin/manage/manageArticle?page="+allpage+"\">尾页</a></li>");
                     %>
                     </ul>
                 </div>
            </div>
         </div>
     </div>
-    <!--填写框-->
-    <div id="fqa-table">  
-        <div class="third-title color-white" style="background-color:#000;color:#fff">
-            <span style="margin-left: 20px" id="fqa-type">新增</span>
-            <a class="fqa-close">
-                <span class="glyphicon glyphicon-remove-circle" style="float: right;top:16px;right: 16px">
-                </span>
-            </a>
-        </div>
-        <form id="fqainfo" action="/opensource/login">
-            <p class="third-title" style="text-align: left; padding-left: 25px">问题：</p>
-            <textarea id="submit-question" style="width: 90%;padding:0;line-height: 25px" rows="2"></textarea>
-            <p class="third-title" style="text-align: left; padding-left: 25px">回答：</p>
-            <textarea id="submit-answer" style="width: 90%;padding:0;line-height: 25px" rows="4"></textarea>
-            <p class="third-title" style="text-align:center;">
-                <a id="fqa-button"><span>提交</span></a>
-            </p>
-            <p style="left:40%;bottom: -9px; position: absolute;color: red" id="fqa-response"></p>
-        </form>
-    </div><!---->
-    <div id="aaaa"></div>
     <!--页脚-->
     <div class="otherfoot">
         <img src="/opensource/images/icon/logo.png" width=60px height=60px class="img-circle" style="margin-left:20vw; border:0;">
@@ -257,6 +234,12 @@
             }
         });
     }); 
+    $(document).ready(function(){
+        $("#content").css("min-height",$(window).height()-81);
+    });
+    $(window).resize(function () {
+        $("#content").css("min-height",$(window).height()-81);
+    });
 </script>
 
 </html>

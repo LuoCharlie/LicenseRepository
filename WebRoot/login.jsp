@@ -33,7 +33,7 @@
 		$("#userinfo").html("");
 		let append = "<span class='login hover-white'>" + username + "</span>";
 		append += "<span style='padding:0 5px 0 5px'>●</span>";
-		append += "<a href='/opensource/logout' class='login' id='logout'>退出</a>";
+		append += "<a class='login' id='logout'>退出</a>";
 		$("#userinfo").append(append);
 		console.log("进入判断  sessionID:"+sessionID+",  username:"+username+",  usertype:"+usertype);
 	}

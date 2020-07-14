@@ -6,12 +6,9 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.opensource.Domain.*" %>
-<%
-	detailLicense license = (detailLicense) request.getAttribute("detail");	
-	List<type> types = (List<type>) request.getAttribute("type"); 
-	List<description> rights = (List<description>) request.getAttribute("right"); 
-	List<description> obligations = (List<description>) request.getAttribute("obligation"); 
-	List<description> prohibitions = (List<description>) request.getAttribute("prohibition"); 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%	
+	//List<type> types = (List<type>) request.getAttribute("type"); 
 	String status = (String)request.getAttribute("status");
 	//获取cookie里的有效数据
 	Cookie cookie = null;
@@ -50,36 +47,27 @@
             <ul class="nav navbar-nav sethover" style="text-align:center; margin-right:60px" >
                 <li class="active dropdown"><a href="/opensource/index.jsp">首页</a></li>
                 <li class="active dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源资源</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源解惑</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/opensource/opensource_software.html">开源软件</a></li>
-                        <li><a href="/opensource/open_source_license.html">开源许可证</a></li>
-                        <li><a href="/opensource/open_source_works.html">开源作品</a></li>
-                    </ul>
-                    
+                        <li><a href="/opensource/license/fqa?page=1"">基础解惑</a></li>
+                        <li><a href="/opensource/license/article?page=1">开源知识</a></li>
+                    </ul>                  
                 </li>
                 <li class="active dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源大事</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">许可证</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/opensource/license/fqa?page=1">基础解惑</a></li>
-                        <li><a href="/opensource/Classification_of_the_preview.html">分类预览</a></li>
                         <li><a href="/opensource/license/licenseDetail?license_name=许可证1">许可证列表</a></li>
-                        <li><a href="/opensource/compatibility_analysis.html">兼容分析</a></li>
                     </ul>
                 </li>
                 <li class="active dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">许可证工具</a>
                     <ul class="dropdown-menu">
                         <li><a href="/opensource/search_engine.jsp">搜索引擎</a></li>
-                        <li><a href="/opensource/the_selector.html">选择器</a></li>
                     </ul>
                 </li>
                 <li class="active dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">开源新资讯</a></li>
-                        <li><a href="#">许可证维度</a></li>
-                        <li><a href="#">许可证生成</a></li>
                     </ul>
                 </li>
             </ul>
@@ -117,60 +105,71 @@
     </div>
     <div class="mask"> </div><!--导航栏结束-->
 	
-    <div class="row-style"  id="license-list" style="display: flex;align-items: flex-start;">
-        <div class = "total-list">
+    <div class="row-style"  id="license-list" style="display: flex;align-items: flex-start;justify-content: center;">
+        <div class = "total-list" style="width:20%;">
             <p class="third-title" style="padding-top: 30px">许可证列表</p>
             <ul>
                 <li>
-                    <div class = "link">全部许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
+                    <div class = "link">全部许可证<span class="glyphicon glyphicon-chevron-down putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse" id = "all-license">
-                    <%
-    					for (type type : types) {
-    						out.println("<li><a href='./licenseDetail?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item"> 
+                        <li>
+                            <a href='/opensource/license/licenseDetail?license_name=${item.name}'>
+                                ${item.name}
+                            </a>
+                        </li>
+                    </c:forEach>  
                     </ul>
                 </li>
                 <li>
-                    <div class = "link">强copyleft许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
+                    <div class = "link">强copyleft许可证<span class="glyphicon glyphicon-chevron-down putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse" id = "strong-license">
-                    <%
-    					for (type type : types) {
-    						if(type.getType().equals("强copyleft许可证"))
-    						out.println("<li><a href='./licenseDetail?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item">
+                        <c:if test="${item.type eq '强copyleft许可证'}">  
+                            <li>
+                                <a href='/opensource/license/licenseDetail?license_name=${item.name}'>
+                                    ${item.name}
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach>    
                     </ul>
                 </li>
                 <li>
-                    <div class = "link">弱copyleft许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
+                    <div class = "link">弱copyleft许可证<span class="glyphicon glyphicon-chevron-down putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse" id = "weak-license">
-                    <%
-    					for (type type : types) {
-    						if(type.getType().equals("弱copyleft许可证"))
-    						out.println("<li><a href='./licenseDetail?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item">
+                        <c:if test="${item.type eq '弱copyleft许可证'}">  
+                            <li>
+                                <a href='/opensource/license/licenseDetail?license_name=${item.name}'>
+                                    ${item.name}
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach> 
                     </ul>
                 </li>
                 <li>
-                    <div class = "link">宽松型许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
+                    <div class = "link">宽松型许可证<span class="glyphicon glyphicon-chevron-down putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse">
-                    <%
-    					for (type type : types) {
-    						if(type.getType().equals("宽松型许可证"))
-    						out.println("<li><a href='./licenseDetail?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item">
+                        <c:if test="${item.type eq '宽松型许可证'}">  
+                            <li>
+                                <a href='/opensource/license/licenseDetail?license_name=${item.name}'>
+                                    ${item.name}
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach> 
                     </ul>
                 </li>
             </ul>
         </div>
-        <div class="text-center col-style" style="background:#FFF;padding:0px;width:1000px;">
+        <div class="text-center col-style" style="background:#FFF;padding:0;margin-right:20%;width:60%;">
          	<br>
           	<div class="row text-align-left" style="margin-bottom:0px">
             	<p>
-                    <span id = "license_name" class="common-title"><%out.println(license.getName());%></span>
+                    <span id = "license_name" class="common-title">${detail.name}</span>
                     <a id="choose-download" style="margin-left: 20px; color: #337ab7">下载</a>
                 </p>
             </div>
@@ -196,7 +195,7 @@
                         <p>摘要</p>
                     </div>
                     <br>
-                    <textarea class="article width-100per" rows="8"><%out.println(license.getAbstractName());%></textarea>
+                    <textarea class="article width-100per" readonly="readonly" rows="8">${detail.abstractName}</textarea>
                     <div class="line" >
                        <br>
                     </div>
@@ -206,97 +205,97 @@
                         <p>维度分析</p>
                     </div>
                     <br>
+
                     <div class="text-align-left bgcolor-grey border-all-thin attribution-part">
     					<h3 class="bgcolor-green">权利</h3>
     					<ul class="third-title">
-    					<%
-	                      	for(description key:rights)
-							{
-	                      		out.println("<li>" +
-									"<div class = \"link border-bottom padding-left-10\"><span class=\"glyphicon glyphicon-chevron-up putdown-icon\"></span>" +
-									key.getName()	+ 
-									"</div>" +
-									"<ul class = \"desc border-bottom\">" +
-									"<li class=\"padding-left-10 padding-right-10\">" +
-									key.getDescription()+"</li></ul></li>");
-							}
-                      	%>
+                        <c:forEach items="${right}" var="item">
+                            <li>
+                                <div class = "link border-bottom padding-left-10 third-title">
+                                    <span class="glyphicon glyphicon-chevron-down putdown-icon"></span>${item.name}
+                                </div>
+                                <ul class = "desc border-bottom anel-collapse collapse">
+                                    <li class="padding-left-10 padding-right-10">
+                                        ${item.description}
+                                    </li>
+                                </ul>
+                            </li>       
+                        </c:forEach>
                       	</ul>
             		</div>
                     
                     <div class="text-align-left bgcolor-grey border-all-thin attribution-part">
 						<h3 class="bgcolor-orange">义务</h3>
     					<ul class="third-title">
-    					<%
-	                      	for(description key:obligations)
-							{
-	                      		out.println("<li>" +
-									"<div class = \"link border-bottom padding-left-10\"><span class=\"glyphicon glyphicon-chevron-up putdown-icon\"></span>" +
-									key.getName()	+ 
-									"</div>" +
-									"<ul class = \"desc border-bottom\">" +
-									"<li class=\"padding-left-10 padding-right-10\">" +
-									key.getDescription()+"</li></ul></li>");
-							}
-                      	%>
+                        <c:forEach items="${obligation}" var="item">
+                            <li>
+                                <div class = "link border-bottom padding-left-10 third-title">
+                                    <span class="glyphicon glyphicon-chevron-down putdown-icon"></span>${item.name}
+                                </div>
+                                <ul class = "desc border-bottom anel-collapse collapse">
+                                    <li class="padding-left-10 padding-right-10">
+                                        ${item.description}
+                                    </li>
+                                </ul>
+                            </li>       
+                        </c:forEach>
                       	</ul>
             		</div>
                     
                     <div class="text-align-left bgcolor-grey border-all-thin attribution-part">
     					<h3 class="bgcolor-red">禁止</h3>
     					<ul class="third-title">
-                      	<%
-                      	for(description key:prohibitions)
-						{
-                      		out.println("<li>" +
-									"<div class = \"link border-bottom padding-left-10\"><span class=\"glyphicon glyphicon-chevron-up putdown-icon\"></span>" +
-									key.getName()	+ 
-									"</div>" +
-									"<ul class = \"desc border-bottom\">" +
-									"<li class=\"padding-left-10 padding-right-10\">" +
-									key.getDescription()+"</li></ul></li>");
-						}
-                      	%>
-        				</ul>
+                      	<c:forEach items="${prohibition}" var="item">
+                            <li>
+                                <div class = "link border-bottom padding-left-10 third-title">
+                                    <span class="glyphicon glyphicon-chevron-down putdown-icon"></span>${item.name}
+                                </div>
+                                <ul class = "desc border-bottom anel-collapse collapse">
+                                    <li class="padding-left-10 padding-right-10">
+                                        ${item.description}
+                                    </li>
+                                </ul>
+                            </li>       
+                        </c:forEach>
             		</div>
     			</div>
     		</div>
             <div id="translation" style="height:700px;">
             	<div class="row">
                 	<br>
-                	<textarea class="article width-100per" rows="32"><%out.println(license.getTranslation());%></textarea>
+                	<textarea class="article width-100per" readonly="readonly" rows="32">${detail.translation}</textarea>
     			</div>
     		</div>
             <div id="origin" style="height:700px;">
             	<div class="row">
                 	<br>
-                	<textarea class="article width-100per" rows="32"><%out.println(license.getOrigation());%></textarea>
+                	<textarea class="article width-100per" readonly="readonly" rows="32">${detail.origation}</textarea>
     			</div>
     		</div>
             <div id="information" style="height:700px;">
             	<div class="row text-align-left margin-top-50">
-            		<span>名称:</span><input type="text"  name="name" value="<%out.println(license.getName());%>"/>
+            		<span>名称:</span><input type="text" readonly="readonly" name="name" value="${detail.name}"/>
     			</div>
     			<div class="row text-align-left margin-top-50">
-            		<span>简称:</span><input type="text"  name="abbreviation" value="<%out.println(license.getAbbreviation());%>"/>
+            		<span>简称:</span><input type="text" readonly="readonly"  name="abbreviation" value="${detail.abbreviation}"/>
     			</div>
     			<div class="row text-align-left margin-top-50">
-            		<span>类别:</span><input type="text"  name="category" value="<%out.println(license.getType());%>"/>
+            		<span>类别:</span><input type="text" readonly="readonly"  name="category" value="${detail.type}"/>
     			</div>
                 <div class="row text-align-left margin-top-50">
-            		<span>所有者:</span><input type="text"  name="owner" value="<%out.println(license.getOwner());%>"/>
+            		<span>所有者:</span><input type="text" readonly="readonly"  name="owner" value="${detail.owner}"/>
     			</div>
                 <div class="row text-align-left margin-top-50">
-            		<span style="vertical-align:top;">发展史:</span><textarea class="article width-70per" rows="12" name="history"><%out.println(license.getHistory());%></textarea>
+            		<span style="vertical-align:top;">发展史:</span><textarea class="article width-70per" readonly="readonly" rows="12" name="history">${detail.history}</textarea>
     			</div>
                 <div class="row text-align-left margin-top-50">
-            		<span>原文链接:</span><input type="text"  name="url" value="<%out.println(license.getOriginURL());%>"/>
+            		<span>原文链接:</span><input type="text" readonly="readonly"  name="url" value="${detail.originURL}"/>
     			</div>
                 <div class="row text-align-left margin-top-50">
-            		<span>SPDX列表:</span><input type="text"  name="SPDX" value="<%out.println(license.getSPDX());%>"/>
+            		<span>SPDX列表:</span><input type="text" readonly="readonly"  name="SPDX" value="${detail.SPDX}"/>
     			</div>
     			<div class="row text-align-left margin-top-50">
-            		<span>整理人:</span><input type="text"  name="admin" value="<%out.println(license.getAdmin());%>"/>
+            		<span>整理人:</span><input type="text" readonly="readonly"  name="admin" value="${detail.admin}"/>
     			</div>
             </div>
     	</div>
@@ -339,7 +338,7 @@
                 <tr>
                         <td style="width: 5%"></td>
                         <td style="width: 80px">登录名：</td>
-                        <td><input type="text" name="username" value="admin" placeholder="请输入登录名"  maxlength="10" 
+                        <td><input type="text" name="username" value="admin" placeholder="请输入登录名"  maxlength="16" 
                             style="width: 120px;"></td>
                         <td></td>
                 </tr>
@@ -364,7 +363,7 @@
     
         <div class="third-title">
             <a id="login-button"><span style="margin-left: 30%">登录</span></a>
-            <a id="register-button" class="fifth-title"><span style="margin-left: 40px">点击注册</span></a>
+            <a href="/opensource/register.jsp" id="register-button" class="fifth-title"><span style="margin-left: 40px">点击注册</span></a>
          </div>
          <p style="left:35%;bottom: -9px; position: absolute;color: red" id="response"></p>
          </form>
@@ -383,7 +382,7 @@
            
         </div> 
         <div style="float:right;margin-right:20vw;">在线人数:&nbsp;
-            <span id="online"><%=application.getAttribute("onlineCount")%></span>
+            <span id="online">${onlineCount}</span>
         </div>
     </div> <!--页脚结束-->
 </body>

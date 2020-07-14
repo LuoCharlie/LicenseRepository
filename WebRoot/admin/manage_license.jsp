@@ -6,9 +6,9 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.opensource.Domain.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	detailLicense license = (detailLicense) request.getAttribute("detail");	
-	List<type> types = (List<type>) request.getAttribute("type"); 
 	String status = (String)request.getAttribute("status");
     String right = (String) request.getAttribute("right"); 
     String obligation = (String) request.getAttribute("obligation"); 
@@ -50,9 +50,10 @@
         <div class="" id="myNavbar" style="min-height:81px;">
             <img src="/opensource/images/icon/logo.png" width=52px height=52px class="img-circle nav navbar-nav" 
             style="margin-left:12vw;transform: translateY(14px);">
-            <ul class="nav navbar-nav sethover" style="text-align:center; margin-right:260px" >
+            <ul class="nav navbar-nav sethover" style="text-align:center; margin-right:160px" >
                 <li class="active dropdown"><a href="/opensource/admin/index.jsp">管理中心</a></li>
                 <li class="active dropdown"><a href="/opensource/admin/manage/manageFqa?page=1">知识库</a></li>
+                <li class="active dropdown"><a href="/opensource/admin/manage/manageArticle?page=1">文章库</a></li>
                 <li class="active dropdown"><a href="/opensource/admin/manage/manageLicense?license_name=许可证1">许可证管理</a></li>
             </ul>
             <ul class="nav navbar-nav">
@@ -90,55 +91,66 @@
     <div class="mask"> </div><!--导航栏结束-->
 	
     <div class="row-style"  id="license-list" style="display: flex;align-items: flex-start;">
-        <div class = "total-list">
+        <div class = "total-list" style="width: 20%">
             <p class="third-title" style="padding-top: 30px">许可证列表</p>
             <ul>
                 <li>
                     <div class = "link">全部许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse" id = "all-license">
-                    <%
-    					for (type type : types) {
-    						out.println("<li><a href='/opensource/admin/manage/manageLicense?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item"> 
+                        <li>
+                            <a href='/opensource/admin/manage/manageLicense?license_name=${item.name}'>
+                                ${item.name}
+                            </a>
+                        </li>
+                    </c:forEach> 
                     </ul>
                 </li>
                 <li>
                     <div class = "link">强copyleft许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse" id = "strong-license">
-                    <%
-    					for (type type : types) {
-    						if(type.getType().equals("强copyleft许可证"))
-    						out.println("<li><a href='/opensource/admin/manage/manageLicense?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item">
+                        <c:if test="${item.type eq '强copyleft许可证'}">  
+                            <li>
+                                <a href='/opensource/admin/manage/manageLicense?license_name=${item.name}'>
+                                    ${item.name}
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach> 
                     </ul>
                 </li>
                 <li>
                     <div class = "link">弱copyleft许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse" id = "weak-license">
-                    <%
-    					for (type type : types) {
-    						if(type.getType().equals("弱copyleft许可证"))
-    						out.println("<li><a href='/opensource/admin/manage/manageLicense?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item">
+                        <c:if test="${item.type eq '弱copyleft许可证'}">  
+                            <li>
+                                <a href='/opensource/admin/manage/manageLicense?license_name=${item.name}'>
+                                    ${item.name}
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach> 
                     </ul>
                 </li>
                 <li>
                     <div class = "link">宽松型许可证<span class="glyphicon glyphicon-chevron-up putdown-icon"></span></div>
                     <ul class = "desc anel-collapse collapse">
-                    <%
-    					for (type type : types) {
-    						if(type.getType().equals("宽松型许可证"))
-    						out.println("<li><a href='/opensource/admin/manage/manageLicense?license_name=" + type.getName() +"'>" + type.getName()+"</a></li>");
-    					}
-    				%>
+                    <c:forEach items="${type}" var="item">
+                        <c:if test="${item.type eq '宽松型许可证'}">  
+                            <li>
+                                <a href='/opensource/admin/manage/manageLicense?license_name=${item.name}'>
+                                    ${item.name}
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach> 
                     </ul>
                 </li>
             </ul>
         </div>
-        <div class="text-center col-style" style="background:#FFF;padding:0px;width:1000px;">
+        <div class="text-center col-style" style="background:#FFF;padding:0px;margin-right:20%;width:60%;">
          	<br>
           	<div class="row text-align-left" style="margin-bottom:0px">
             	<p>
@@ -186,12 +198,12 @@
     					<h3 class="bgcolor-green" id="getclick">权利</h3>
                       	<ul class="forth-title" id="right-describe">
                             <form style="padding-left: 20px">
-                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="出售">出售</label></p> 
                                 <p><label class="checkbox-inline"><input type="checkbox" value="分发">分发</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="可读">可读</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="再复制">再复制</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="出售">出售</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="再复制">再复制</label></p>  
                             </form>
                         </ul>
             		</div>
@@ -200,8 +212,8 @@
     					<h3 class="bgcolor-orange">义务</h3>
                       	<ul class="forth-title" id="obligation-describe">
                             <form style="padding-left: 20px">
-                                <p><label class="checkbox-inline"><input type="checkbox" value="附加政策">附加政策</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="附加源">附加源</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="附加政策">附加政策</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="特性">特性</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="相同授权条款">相同授权条款</label></p>
                             </form>
@@ -212,9 +224,9 @@
     					<h3 class="bgcolor-red">禁止</h3>
                       	<ul class="forth-title" id="prohibition-describe">
                             <form style="padding-left: 20px">
-                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="分发">分发</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>   
                             </form>
                         </ul>
             		</div>
@@ -277,7 +289,7 @@
             Copyright &copy; 西南大学<a href="http://www.swu.edu.cn/" target="_blank" title="西南大学">www.swu.edu.cn</a>         
         </div> 
         <div style="float:right;margin-right:20vw;">在线人数:&nbsp;
-            <span id="online"><%=application.getAttribute("onlineCount")%></span>
+            <span id="online">${onlineCount}</span>
         </div>
     </div> <!--页脚结束-->
     <input type="hidden" id="username" name="data" value="${username}">
@@ -306,7 +318,7 @@
         $.post("/opensource/logout", null, function(data){
             if(data==="0")
             {
-                window.location.href("/opensource/index.jsp");
+                window.location.href="/opensource/index.jsp";
             }
         });
     });

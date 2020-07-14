@@ -321,6 +321,7 @@ $(document).ready(function(){
 		if(bool==="0")
 		{
 			$("#login-type").text("管理员登录");
+			$("#register-button").css("visibility","hidden");
 		}
 		Handler.loginAct($("#login-table"),bool);
 	});
@@ -329,6 +330,7 @@ $(document).ready(function(){
 		if(bool==="0")
 		{
 			$("#login-type").text("用户登录");
+			$("#register-button").css("visibility","visible");
 		}
 		//console.log(bool);
 		Handler.loginAct($("#login-table"),bool);
@@ -348,9 +350,9 @@ $(document).ready(function(){
 		{
 			usertype = "user";
 		}
-		let name = $("input[name='username']").val();
+		let username = $("input[name='username']").val();
 		let password = $("input[name='password']").val();
-		if(name===""||password==="")
+		if(username===""||password==="")
 		{
 			$("#response").text("请输入用户名或密码！");
 			setTimeout(function(){$("#response").text("");},3000);
@@ -358,9 +360,9 @@ $(document).ready(function(){
 		}
 		let code = $("input[name='code']").val();
 		let location = encodeURI(window.location.pathname + window.location.search);
-		console.log("usertype:"+usertype+".  name:"+name+",  password:"+password+",  code"+code+";  location"+location);
-		$.post("/opensource/login", { "usertype":usertype, "name":name,"password":password,"code":code,"location":location}, function(data){
-			var response = parseInt(data);
+		console.log("usertype:"+usertype+".  name:"+username+",  password:"+password+",  code"+code+";  location"+location);
+		$.post("/opensource/login", { "usertype":usertype, "username":username,"password":password,"code":code,"location":location}, function(data){
+			let response = parseInt(data);
 			if(response===-2)  //验证码错误
 			{
 				$("#response").html("&emsp;验证码错误！&emsp;");
@@ -371,68 +373,32 @@ $(document).ready(function(){
 			else if(response===-1)  //用户名或密码错误
 			{
 				$("#response").text("用户名或密码错误！");
+				$("#vericodeImg").attr("src","/opensource/imageCode?"+Math.random());
 				setTimeout(function(){
 					$("#response").text("");
 				},3000);
 			}
-			else if(response===0)  //登录成功
+			else if(response===0)  //进入普通用户登录成功
 			{
 				console.log(response);
 				$("#login-admin").text(name);
 				$("#login-common").text("退出");
 				window.location.reload();
-				
 				//Handler.loginAct($("#login-table"),"1");
 			}
-			else if(response===1)//发生意外错误
+			else if(response===1)//进入管理员
 			{
 				console.log(response);
-				window.location.href("/opensource/admin/index.jsp");
+				window.location.href="/opensource/admin/index.jsp";
 			}
 		});
 	});
+	
 	$("#logout").click(function(){
 		$.post("/opensource/logout", null, function(data){
 				window.location.reload();
 		});
 	});
-	/*
-	$("#notsee").click(function(){
-		$(this).attr('href',changeImg());
-	});
-*/
-	/*
-	$("#logout").click(function()
-   	{
-   		$.post("../logout", null, function(data){
-   			if(data==="0")
-   			{
-   				alert("成功退出");
-   				window.location.reload();
-   			}
-   		});
-   	});*/
-	/*
-	$("#try-download").click(function(){  //点击下载按钮
-		<%
-		 	String name=(String)session.getAttribute("username");
-			    if(name!=null)
-			    {
-			    	$.get("../download", {license_name : arr[1]}, function(data){
-					content(data);
-					});
-			    }
-				else
-				{ 
-				response.sendRedirect("index.jsp");
-				 if(username==null){
-				    out.println("未登录");
-				 }else{
-				    out.println("已登录");
-				}
-			 }
-		%>
-	});*/
 });
 
 /**/

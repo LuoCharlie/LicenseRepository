@@ -29,36 +29,27 @@
             <ul class="nav navbar-nav sethover" style="text-align:center; margin-right:60px" >
                 <li class="active dropdown"><a href="/opensource/index.jsp">首页</a></li>
                 <li class="active dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源资源</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源解惑</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/opensource/opensource_software.html">开源软件</a></li>
-                        <li><a href="/opensource/open_source_license.html">开源许可证</a></li>
-                        <li><a href="/opensource/open_source_works.html">开源作品</a></li>
-                    </ul>
-                    
+                        <li><a href="/opensource/license/fqa?page=1"">基础解惑</a></li>
+                        <li><a href="/opensource/license/article?page=1">开源知识</a></li>
+                    </ul>                  
                 </li>
                 <li class="active dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源大事</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">许可证</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/opensource/license/fqa?page=1">基础解惑</a></li>
-                        <li><a href="/opensource/Classification_of_the_preview.html">分类预览</a></li>
                         <li><a href="/opensource/license/licenseDetail?license_name=许可证1">许可证列表</a></li>
-                        <li><a href="/opensource/compatibility_analysis.html">兼容分析</a></li>
                     </ul>
                 </li>
                 <li class="active dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">许可证工具</a>
                     <ul class="dropdown-menu">
                         <li><a href="/opensource/search_engine.jsp">搜索引擎</a></li>
-                        <li><a href="/opensource/the_selector.html">选择器</a></li>
                     </ul>
                 </li>
                 <li class="active dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">开源新资讯</a></li>
-                        <li><a href="#">许可证维度</a></li>
-                        <li><a href="#">许可证生成</a></li>
                     </ul>
                 </li>
             </ul>
@@ -122,30 +113,29 @@
                     <div id="rights" style="display:block">
                         <select class="search_engine-select">
                             <option value ="-- 选择 --">-- 选择 --</option> <!--Commercialize-->
-                            <option value ="商业">商业</option> <!--Commercialize-->
-                            <option value="衍生">衍生</option><!--Derive-->
-                            <option value="分发">分发</option><!--Distribute-->
-                            <option value="可读">可读</option><!--Read-->
-                            <option value="再复制">再复制</option><!--Reproduce-->
                             <option value="出售">出售</option><!--Sell-->
+                            <option value="分发">分发</option><!--Distribute-->
+                            <option value="可读">可读</option><!--Read-->      
+                            <option value ="商业">商业</option> <!--Commercialize-->
+                            <option value="衍生">衍生</option><!--Derive-->                            
+                            <option value="再复制">再复制</option><!--Reproduce-->                            
                         </select>
                     </div>
                     <div id="obligations" style="display:none">
                     <select class="search_engine-select">
                         <option value ="-- Choose an option --">-- 选择 --</option>
-                        <option value ="Attach policy">附加政策</option>
                         <option value="Attach source">附加源</option>
+                        <option value ="Attach policy">附加政策</option>
                         <option value="Attribute">特性</option>
-
                         <option value="Share alike">相同授权条款</option>
                     </select>
                     </div>
                     <div id="prohibition" style="display:none">
                     <select class="search_engine-select">
                         <option value ="-- Choose an option --">-- 选择 --</option>
-                        <option value ="Commercialize">商业</option>
-                        <option value="Derive">衍生</option>
                         <option value="Distribute">分发</option>
+                        <option value ="Commercialize">商业</option>
+                        <option value="Derive">衍生</option> 
                     </select>
                     </div>
                     <div class="row title-margin-top-50 " id="select">
@@ -240,7 +230,7 @@
                 <tr>
                         <td style="width: 5%"></td>
                         <td style="width: 80px">登录名：</td>
-                        <td><input type="text" name="username" value="admin" placeholder="请输入登录名"  maxlength="10" 
+                        <td><input type="text" name="username" value="admin" placeholder="请输入登录名"  maxlength="16" 
                             style="width: 120px;"></td>
                         <td></td>
                 </tr>
@@ -265,8 +255,8 @@
     
         <div class="third-title">
             <a id="login-button"><span style="margin-left: 30%">登录</span></a>
-            <a id="register-button" class="fifth-title"><span style="margin-left: 40px">点击注册</span></a>
-         </div>
+            <a href="/opensource/register.jsp" id="register-button" class="fifth-title"><span style="margin-left: 40px">点击注册</span></a>
+        </div>
          <p style="left:35%;bottom: -9px; position: absolute;color: red" id="response"></p>
          </form>
     </div><!--登录注册结束-->
@@ -284,7 +274,7 @@
            
         </div> 
         <div style="float:right;margin-right:20vw;">在线人数:&nbsp;
-            <span id="online"><%=application.getAttribute("onlineCount")%></span>
+            <span id="online">${onlineCount}</span>
         </div>
     </div> <!--页脚结束-->
 </body>

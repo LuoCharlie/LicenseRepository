@@ -15,12 +15,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"> 
-    <title>首页</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>搜索引擎</title>
     <link rel="stylesheet" href="/opensource/css/bootstrap.min.css">  
     <link rel="stylesheet" type="text/css" href="/opensource/css/style.css" />
 </head>
-<body class="index ">
+<body style="background-color:#FFF">
     <!--导航栏-->
     <div class="row box" style="background-color:#000; font-size:16px">
         <div class="" id="myNavbar" style="min-height:81px;">
@@ -31,7 +31,7 @@
                 <li class="active dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源解惑</a>
                     <ul class="dropdown-menu">
-                        <li><a href="/opensource/license/fqa?page=1">基础解惑</a></li>
+                        <li><a href="/opensource/license/fqa?page=1"">基础解惑</a></li>
                         <li><a href="/opensource/license/article?page=1">开源知识</a></li>
                     </ul>                  
                 </li>
@@ -85,48 +85,60 @@
             </div>
         </div>
     </div>
-    <div class="mask"> </div><!--导航栏结束--> 
-    <div class="cov"> </div>
-    <div class="container row-style cov-height" style="padding: 0;margin:0;width: 100%">
-            <h1 class="text1">开源之道</h1>
-            <h2><p class="text2">We can help you learn more about open source knowledge！</p></h2>
-    </div>
-    <div class="index-body">
-        <h1 class="main-title" style="margin-top:0px">什么是开源？</h1>    
-        <div class="row index-row">
-            <div>
-                <img src="images/whatis.png" width=700px height=200px>
-            </div>
-            <div style="width:700px;padding-left: 50px">
-                <p class="distext">为什么有人要放弃流血流泪的软件程序？以及如何将其赠与？此外，将软件发布给所有人后会发生什么？谁来照顾它并产生新的和改进的版本？要回答这些问题，我们必须在社区建设的背景下考虑将开源作为一种软件开发方法.</p>
-                <p class="distext">开源是由许多人开发的，除了对开源项目感兴趣之外，他们可能彼此之间没有任何联系。因此，采用的软件开发方法与封闭源开发项目中发现的方法不同。</p>
-                <a href="/opensource/license/fqa?page=1" class="more">查看更多</a>
-            </div>
-        </div>
-        <h1 class="main-title">什么是开源软件？</h1> 
-        <div class="row index-row">
-            <div style="width:700px; padding-right: 50px">
-                <p class="distext"> 问一下开源软件的主要定义特征是什么，大多数人会告诉你它是免费的！通常这是正确的，但这不是定义特征。理解开源软件含义的关键在于许可证。</p>
-                <p class="distext">您甚至可能尚未意识到几乎所有软件都附带了许可证。软件是版权材料，需要许可证才能使您知道如何使用该软件。开源软件始终是根据经过开源倡议（OSI）认证的许可发布的软件。这些许可证经认证符合开放源代码定义的标准。该定义包括10条标准。其中最重要的一点可能是软件的免费重新分发，对源代码的访问以及允许对软件和衍生作品进行修改的许可，这些许可可以在相同的许可条件下进行分发。</p>
-                <a href="/opensource/license/fqa?page=1" class="more">查看更多</a>
-            </div>
-            <div>
-                <img src="images/u33.png" width=700px height=300px>
-            </div> 
-        </div>
-        <h1 class="main-title">什么是开源许可证？</h1> 
-        <div class="row index-row">
-            <div>
-                <img src="images/u29.png" width=600px height=300px>
-            </div>
-            <div style="width:700px;padding-left: 50px">
-                <p class="distext">许可证即授权条款。开源软件并非完全没有限制。最基本的限制，就是开源软件强迫任何使用和修改该软件的人承认发起人的著作权和所有参与人的贡献。任何人拥有可以自由复制、修改、使用这些源代码的权利，不得设置针对任何人或团体领域的限制。不得限制开源软件的商业使用等。而许可证就是这样一个保证这些限制的法律文件。</p>
-                <p class="distext">License是软件的授权许可，里面详尽表述了你获得代码后拥有的权利，可以对别人的作品进行何种操作，何种操作又是被禁止的。软件协议可分为开源和商业两类，对于商业协议，或者叫法律声明、许可协议，每个软件会有自己的一套行文，由软件作者或专门律师撰写，对于大多数人来说不必自己花时间和精力去写繁长的许可协议，选择一份广为流传的开源协议就是个不错的选择。世界上开源软件协议OPEN SOURCE LICENSE的种类非常之多，并且同一款协议有很多变种，协议太宽松会导致作者丧失对作品的很多权利，太严格又不便于使用者使用及作品的传播，所以开源作者要考虑自己对作品想保留哪些权利，放开哪些限制。</p>
-                <p class="distext">世界上的开源许可证（Open Source License）大概有上百种，我们常见的开源协议。大致有GPL、BSD、MIT、Mozilla、Apache和LGPL等。</p>
-                <a href="/opensource/license/fqa?page=1" class="more">查看更多</a>
-            </div> 
-        </div>
-    </div>
+    <div class="mask"> </div><!--导航栏结束-->
+
+	<div style="display: flex;display: flex;justify-content: center;"> 
+    	<div class="mask"> </div>  
+        
+        <form id="registerinfo" action="/opensource/login">
+            <p class="common-title" style="text-align:center;margin-top: 50px; ">注册</p>
+            <table style="margin-top: 8%;margin-left: 100px" class="forth-title">
+                <tbody>
+                    <tr>
+                            <td style="width: 5%"></td>
+                            <td style="width: 80px">用户名：</td>
+                            <td><input type="text" name="registername" value="" placeholder="请输入登录名"  maxlength="16" 
+                                style="width: 120px;">
+                                <span style="font-weight:200;font-size: 12px">以数字、字母开头，不能使用特殊字符
+                                </span>
+                            </td>
+                            <td></td>
+                    </tr>
+                    <tr>
+                            <td></td>
+                            <td>密码：</td>
+                            <td id="passwd"><input type="password" name="registerpassword" value="" placeholder="请输入大于6位的密码" 
+                                maxlength="16" style="width: 150px;">
+                                <span class="glyphicon glyphicon-ok-sign"></span>
+                            </td>
+                            <td></td>
+                    </tr>
+                    <tr>
+                            <td></td>
+                            <td>确认密码：</td>
+                            <td id="passwd-check"><input type="password" value="" placeholder="请重复密码" 
+                                maxlength="16" style="width: 150px;">
+                                <span class="glyphicon glyphicon-ok-sign"></span>
+                            </td>
+                            <td></td>
+                    </tr>
+                    <tr>
+                            <td></td>
+                            <td>验证码：</td>
+                            <td>
+                                <input type="text" name="registercode" maxlength="4" style="width: 50px;">
+                                <img id="registercodeImg" src="/opensource/imageCode">
+                                <a id="notsee" href="javascript:registerchangeImg();">点击更换</a>
+                            </td>
+                            <td></td>
+                    </tr>           
+                </tbody>       
+            </table>
+            <p style="text-align: center;color: red;height: 20px" id="register-response"></p>
+            <button id="register"  type="button" class="btn button-blue" style="margin-bottom: 20px;margin-left: 40%;margin-top: 10px">提交</button>     
+         </form>
+	</div>
+
     <!--下载栏-->
     <div id="download-list" tabindex="0">
         <div class="second-title color-white text-align-center" style="width:350px;">
@@ -162,7 +174,7 @@
         <table style=" margin-left: 30px; margin-top: 10px" class="forth-title">
             <tbody>
                 <tr>
-                        <td style="width: 15%"></td>
+                        <td style="width: 5%"></td>
                         <td style="width: 80px">登录名：</td>
                         <td><input type="text" name="username" value="admin" placeholder="请输入登录名"  maxlength="16" 
                             style="width: 120px;"></td>
@@ -215,23 +227,104 @@
     <script type="text/javascript" src="/opensource/js/jquery-3.5.1.min.js"></script> 
     <script type="text/javascript" src="/opensource/js/jquery.cookie.js"></script> 
     <script type="text/javascript" src="/opensource/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/opensource/js/fqa.js"></script>
-    <script type="text/javascript" src="/opensource/js/common.js"></script> 
+    <script type="text/javascript" src="/opensource/js/common.js"></script>  
     <jsp:include   page="downlist.jsp" flush="true"/>
     <jsp:include   page="login.jsp" flush="true"/>
-    <script> 
-    function changeImg() {
+    <script type="text/javascript">
+        function changeImg() {
           //需要让每次请求的url都发生变化。否则服务器会认为访问的时一张图片，就不会刷新请求了
           //每次url一样，服务器会认为访问的url是同一张图片，没变化啊
-        $("#vericodeImg").attr("src","/opensource/imageCode?"+Math.random());
-    }
-    $(document).ready(function(){
-        $(".cov").css("height",$(window).height());
-        $(".cov-height").css("height",$(window).height()); 
-    });
-    $(window).resize(function () {
-        $(".cov").css("height",$(window).height());
-        $(".cov-height").css("height",$(window).height());
-    });
+            $("#vericodeImg").attr("src","/opensource/imageCode?"+Math.random());
+        }
+        function registerchangeImg() {
+          //需要让每次请求的url都发生变化。否则服务器会认为访问的时一张图片，就不会刷新请求了
+          //每次url一样，服务器会认为访问的url是同一张图片，没变化啊
+            $("#registercodeImg").attr("src","/opensource/imageCode?"+Math.random());
+        }
+        $("#passwd span").css("opacity",0);
+        $("#passwd-check span").css("opacity",0);
+        $("#passwd input").bind("input propertychange", function(){
+            $("#passwd span").css("opacity",1);
+            let length = $("#passwd input").val().trim().length;
+            if(length>=6)
+            {
+               $("#passwd span").css("color","#66CC33");
+               if($("#passwd input").val()===$("#passwd-check input").val())
+                {
+                   $("#passwd-check span").css("color","#66CC33");
+                   $("#passwd span").css("color","#66CC33");
+                }
+                else
+                {
+                     $("#passwd span").css("color","#CC0000");
+                }
+            }
+            
+        });
+        $("#passwd-check input").bind("input propertychange", function(){
+            $("#passwd-check span").css("opacity",1);
+            $("#passwd-check span").css("color","#CC0000");
+            if($("#passwd input").val()===$("#passwd-check input").val())
+            {
+               $("#passwd-check span").css("color","#66CC33");
+               $("#passwd span").css("color","#66CC33");
+            }
+            else
+            {
+                 $("#passwd-check span").css("color","#CC0000");
+            }
+        });
+        $("#register").click(function(){
+            let regex = /^[^_][A-Za-z]*[a-z0-9_]*$/;
+            let regex2 = /[@#\$%\^&\*]+/gi;
+            let ret2 = regex2.test($("[name='registername']").val());
+            let ret = regex.test($("[name='registername']").val());
+            if(!ret2&&ret)
+            {
+                let username = $("[name='registername']").val();
+                if($("#passwd input").val()===$("#passwd-check input").val())
+                { 
+                    //alert("输入正确");
+                    let password = $("#passwd input").val();
+                    let code = $("[name='registercode']").val();
+                    //let location = encodeURI(window.location.pathname + window.location.search);
+                    $.post("/opensource/register", {"usertype":"user","username":username,"password":password,"code":code,"location":"/opensource/index.jsp"}, function(data){
+                            let response = parseInt(data);
+                            //alert(data);
+                            if(response===-1)  //用户名或密码错误
+                            {
+                                $("#register-response").text("用户名已存在,请更换！");
+                                registerchangeImg();
+                                setTimeout(function(){
+                                    $("#register-response").text("");
+                                },2000);
+                            }
+                            else if(response===0)
+                            {
+                                alert("恭喜你，注册成功！");
+                                window.location.href="/opensource/index.jsp";
+                            }
+                    });
+                }
+                else
+                {
+                    //alert("密码不一致！");  
+                    $("#register-response").text("密码不一致！");   
+                    setTimeout(function(){
+                        $("#register-response").text("");
+                    },2000);   
+                }
+            } else 
+            {
+                //alert("用户名格式错误！");
+                $("#register-response").text("用户名格式错误！");   
+                setTimeout(function(){
+                    $("#register-response").text("");
+                },2000);   
+            }
+            
+            
+        });
     </script>
+
 </html>

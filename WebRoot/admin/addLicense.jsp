@@ -41,7 +41,7 @@
         <div class="" id="myNavbar" style="min-height:81px;">
             <img src="/opensource/images/icon/logo.png" width=52px height=52px class="img-circle nav navbar-nav" 
             style="margin-left:12vw;transform: translateY(14px);">
-            <ul class="nav navbar-nav sethover" style="text-align:center; margin-right:260px" >
+            <ul class="nav navbar-nav sethover" style="text-align:center; margin-right:160px" >
                 <li class="active dropdown"><a href="/opensource/admin/index.jsp">管理中心</a></li>
                 <li class="active dropdown"><a href="/opensource/admin/manage/manageFqa?page=1">知识库</a></li>
                 <li class="active dropdown"><a href="/opensource/admin/manage/manageLicense?license_name=许可证1">许可证管理</a></li>
@@ -126,12 +126,12 @@
     					<h3 class="bgcolor-green" id="getclick">权利</h3>
                       	<ul class="forth-title" id="right-describe">
                             <form style="padding-left: 20px">
-                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="出售">出售</label></p> 
                                 <p><label class="checkbox-inline"><input type="checkbox" value="分发">分发</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="可读">可读</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="再复制">再复制</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="出售">出售</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="再复制">再复制</label></p>  
                             </form>
                         </ul>
             		</div>
@@ -140,8 +140,8 @@
     					<h3 class="bgcolor-orange">义务</h3>
                       	<ul class="forth-title" id="obligation-describe">
                             <form style="padding-left: 20px">
-                                <p><label class="checkbox-inline"><input type="checkbox" value="附加政策">附加政策</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="附加源">附加源</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="附加政策">附加政策</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="特性">特性</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="相同授权条款">相同授权条款</label></p>
                             </form>
@@ -152,9 +152,9 @@
     					<h3 class="bgcolor-red">禁止</h3>
                       	<ul class="forth-title" id="prohibition-describe">
                             <form style="padding-left: 20px">
-                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
-                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>
                                 <p><label class="checkbox-inline"><input type="checkbox" value="分发">分发</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="商业">商业</label></p>
+                                <p><label class="checkbox-inline"><input type="checkbox" value="衍生">衍生</label></p>   
                             </form>
                         </ul>
             		</div>
@@ -216,7 +216,7 @@
             Copyright &copy; 西南大学<a href="http://www.swu.edu.cn/" target="_blank" title="西南大学">www.swu.edu.cn</a>         
         </div> 
         <div style="float:right;margin-right:20vw;">在线人数:&nbsp;
-            <span id="online"><%=application.getAttribute("onlineCount")%></span>
+            <span id="online">${onlineCount}</span>
         </div>
     </div> <!--页脚结束-->
     <input type="hidden" id="username" name="data" value="${username}">
@@ -245,6 +245,7 @@
             if(data==="0")
             {
                 window.location.href("/opensource/index.jsp");
+                window.location.href="/opensource/index.jsp";
             }
         });
     });    

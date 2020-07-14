@@ -80,18 +80,18 @@ String listLength = (String)request.getAttribute("listLength");
 			   		{
 			   			alert("请勿重复添加！");
 			   		}
-                    else if(data==="-2")
-                    {
-                        alert("最多添加十个！");
-                    }
-                    else
-                    {
-                    	$(".download-table").html("<tr><td style=\"width: 85%\"></td> <td style=\"width: 15%\"></td></tr>");
-                        alert("已添加到下载列表!");
-                        let listjson = JSON.parse(decodeURIComponent(data));
-                        let addstring = "";
-                        for(var i = 0; i < listjson.length; i++) {
-                        	addstring += "<tr><td><span>" + (i+1) +"、" + listjson[i] + "</span></td><td><a  class='forth-title delete'><span>删除</span></a></td></tr>"   
+            else if(data==="-2")
+            {
+                alert("最多添加十个！");
+            }
+            else
+            {
+            	$(".download-table").html("<tr><td style=\"width: 85%\"></td> <td style=\"width: 15%\"></td></tr>");
+                alert("已添加到下载列表!");
+                let listjson = JSON.parse(decodeURIComponent(data));
+                let addstring = "";
+                for(var i = 0; i < listjson.length; i++) {
+                	addstring += "<tr><td><span>" + (i+1) +"、" + listjson[i] + "</span></td><td><a  class='forth-title delete'><span>删除</span></a></td></tr>"   
 						}
                         $(".download-table").append(addstring);
                     }

@@ -6,8 +6,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.opensource.Domain.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-	List<fqa> fqas = (List<fqa>) request.getAttribute("fqa"); 
 	String paramindex = (String)request.getAttribute("indexpage"); 
 	String paramall = (String)request.getAttribute("allpage"); 
 	int indexpage = Integer.parseInt(paramindex);
@@ -34,39 +34,27 @@
             <ul class="nav navbar-nav sethover" style="text-align:center; margin-right:60px" >
                 <li class="active dropdown"><a href="/opensource/index.jsp">首页</a></li>
                 <li class="active dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源资源</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/opensource/opensource_software.html">开源软件</a></li>
-                        <li><a href="/opensource/open_source_license.html">开源许可证</a></li>
-                        <li><a href="/opensource/open_source_works.html">开源作品</a></li>
-                        <li><a href="/opensource/opensource_software.html">开源软件</a></li>
-                        <li><a href="/opensource/open_source_license.html">开源许可证</a></li>
-                        <li><a href="/opensource/open_source_works.html">开源作品</a></li>
-                    </ul>
-                    
-                </li>
-                <li class="active dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源大事</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">开源解惑</a>
                     <ul class="dropdown-menu">
                         <li><a href="/opensource/license/fqa?page=1"">基础解惑</a></li>
-                        <li><a href="/opensource/Classification_of_the_preview.html">分类预览</a></li>
+                        <li><a href="/opensource/license/article?page=1">开源知识</a></li>
+                    </ul>                  
+                </li>
+                <li class="active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">许可证</a>
+                    <ul class="dropdown-menu">
                         <li><a href="/opensource/license/licenseDetail?license_name=许可证1">许可证列表</a></li>
-                        <li><a href="/opensource/compatibility_analysis.html">兼容分析</a></li>
                     </ul>
                 </li>
                 <li class="active dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">许可证工具</a>
                     <ul class="dropdown-menu">
                         <li><a href="/opensource/search_engine.jsp">搜索引擎</a></li>
-                        <li><a href="/opensource/the_selector.html">选择器</a></li>
                     </ul>
                 </li>
                 <li class="active dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">开源新资讯</a></li>
-                        <li><a href="#">许可证维度</a></li>
-                        <li><a href="#">许可证生成</a></li>
                     </ul>
                 </li>
             </ul>
@@ -110,20 +98,29 @@
 	      	<div class="row title">
 	        	<p class="common-title text-align-center"><span>基础解惑</span></p>
 	        </div>
-	        <%
-				for (fqa fqa : fqas) {
-					out.println("<div class=\"row\"><div class=\"content-total text-align-right\" ><p style=\"width:600px;	word-wrap: break-word; display:inline-block\">"
-						+fqa.getId()+"、"+fqa.getQuestion()
-						+"</p><span class=\"float-right  content-total-time content-format\"><span class=\"glyphicon glyphicon-time\"></span><span>&nbsp;"
-						+fqa.getDate()
-						+"</span><span class=\"padding-left-50\">撰稿人:"
-						+fqa.getAdmin()
-						+"</span></span></div><div><p status=\"0\" class=\"text close_text content-article text-align-right\">"
-						+fqa.getAnswer()
-						+"</p><div class=\"text-align-right show_more\"><a href=\"javascript:void(0);\" class=\"show_more_btn\">查看更多</a>"
-						+"</div></div><div class=\"line\"></div></div>");
-				}
-	 		%>
+            <%int num = (indexpage-1)*10+1;%>
+            <c:forEach items="${fqa}" var="item">
+                <div class="row">
+                    <div class="content-total text-align-right" style="padding-bottom: 8px">
+                        <p style="width:600px;word-wrap: break-word; display:inline-block">
+                            <%=num++%>、${item.question}
+                        </p>
+                        <span class="float-right  content-total-time content-format">
+                            <span class="glyphicon glyphicon-time"></span>
+                            <span>&nbsp;${item.date}</span>
+                            <span class="padding-left-50">撰稿人:${item.admin}</span>  
+                        </span>
+                    </div>
+                    <div>
+                        <p status="0" class="text close_text content-article text-align-right">
+                        ${item.answer}</p> 
+                        <div class="text-align-right show_more">
+                            <a href="javascript:void(0);" class="show_more_btn">查看更多</a>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+                </div>
+            </c:forEach>
 	 		<div class="row" style="margin:18px 0 68px 0;">
 				<ul class="pagination">
 					<li>
@@ -237,7 +234,7 @@
                 <tr>
                         <td style="width: 15%"></td>
                         <td style="width: 80px">登录名：</td>
-                        <td><input type="text" name="username" value="admin" placeholder="请输入登录名"  maxlength="10" 
+                        <td><input type="text" name="username" value="admin" placeholder="请输入登录名"  maxlength="16" 
                             style="width: 120px;"></td>
                         <td></td>
                 </tr>
@@ -262,7 +259,7 @@
     
         <div class="third-title">
             <a id="login-button"><span style="margin-left: 30%">登录</span></a>
-            <a id="register-button" class="fifth-title"><span style="margin-left: 40px">点击注册</span></a>
+            <a href="/opensource/register.jsp" id="register-button" class="fifth-title"><span style="margin-left: 40px">点击注册</span></a>
          </div>
          <p style="left:35%;bottom: -9px; position: absolute;color: red" id="response"></p>
          </form>
@@ -281,7 +278,7 @@
            
         </div> 
         <div style="float:right;margin-right:20vw;">在线人数:&nbsp;
-            <span id="online"><%=application.getAttribute("onlineCount")%></span>
+            <span id="online">${onlineCount}</span>
         </div>
     </div> <!--页脚结束-->
 </div>
